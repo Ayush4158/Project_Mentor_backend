@@ -17,8 +17,6 @@ export const createProject = async (req, res) => {
     const generatedTasks =
       (await taskGenerator({ name, objective, description, techStack })) || [];
 
-    console.log("Generated tasks:", generatedTasks);
-
     const project = await Project.create({
       userId: req.user._id,
       name,
@@ -34,18 +32,20 @@ export const createProject = async (req, res) => {
     }
 
     if(githubLink){
-      const user = await User.findById(req.user._id).select("+githubLink")
+      const user = await User.findById(req.user._id).select("+githubAccessToken")
+      console.log("github user ",user)
       if(user?.githubAccessToken){
         const [owner, repo] = githubLink.replace("https://github.com/", "").split("/")
 
-        await axios.post(
+        console.log("owner repo", owner, repo)
+        const repos = await axios.post(
           `https://api.github.com/repos/${owner}/${repo}/hooks`,
           {
             name: "web",
             active: true,
             events: ["push"],
             config: {
-              url: "http://localhost:7777/api/github/webhook",
+              url: "https://dull-bugs-behave.loca.lt/api/github/webhook",
               content_type: "json",
             },
           },
@@ -55,6 +55,7 @@ export const createProject = async (req, res) => {
             }
           }
         )
+        console.log(repos)
       }
     }
 
