@@ -45,7 +45,7 @@ export const createProject = async (req, res) => {
             active: true,
             events: ["push"],
             config: {
-              url: `https://irretrievable-kody-tardily/api/github/webhook`,
+              url: `https://irretrievable-kody-tardily.ngrok-free.dev/api/github/webhook`,
               content_type: "json",
             },
           },
