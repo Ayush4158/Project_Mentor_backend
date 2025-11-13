@@ -45,7 +45,7 @@ export const createProject = async (req, res) => {
             active: true,
             events: ["push"],
             config: {
-              url: "https://dull-bugs-behave.loca.lt/api/github/webhook",
+              url: `https://irretrievable-kody-tardily/api/github/webhook`,
               content_type: "json",
             },
           },
