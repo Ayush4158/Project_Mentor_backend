@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 const app = express()
 app.use(cors(
   {
-    origin: '*',
+    origin: ['*', 'https://irretrievable-kody-tardily.ngrok-free.dev'],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   }
@@ -27,5 +27,9 @@ app.use('/api/project', projectRoute)
 app.use('/api/user-performance', userPerformanceRoute)
 app.use('/api/ai_assistance', intellioRoute)
 app.use('/api/github', githubRoute)
+// app.use('/api/github/webhook', (req,res) => {
+//   console.log('Webhook success: ',req.body)
+//   res.status(200).send("Webhook received successfully");
+// })
 
 export {app}

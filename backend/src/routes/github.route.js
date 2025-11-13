@@ -10,6 +10,6 @@ router.get("/auth", (req, res) => {
   res.redirect(redirectUrl);
 });
 router.get("/callback",verifyJWT, githubCallback);
-router.route("/webhook ").post( githubWebhook)
+router.route("/webhook").post( githubWebhook)
 
 export default router
