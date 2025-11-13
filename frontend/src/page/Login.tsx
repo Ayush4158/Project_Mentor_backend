@@ -41,7 +41,7 @@ const Login = () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
       dispatch(login(data.data))
       // navigate('/') 
-       window.location.href = "http://localhost:7777/api/github/auth";
+       window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/github/auth`;
     },
     onError: (error) => {
       console.error('❌ Login failed:', error)

@@ -9,7 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import SideBar from "../../components/SideBar";
+// import SideBar from "../../components/SideBar";
 
 type WeeklyData = { _id: number; completedCount: number };
 type ProjectData = { _id: string; name: string };
@@ -31,7 +31,7 @@ const Dashboard: React.FC<ThemeType> = ({ theme, setTheme }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:7777/api/user-performance/analysis", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/user-performance/analysis`, {
         withCredentials: true,
       })
       .then((res) => {

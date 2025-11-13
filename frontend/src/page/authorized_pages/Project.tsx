@@ -57,7 +57,7 @@ const Project = () => {
 
     try {
       await axios.patch(
-        `http://localhost:7777/api/project/updateStatus/${project._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/project/updateStatus/${project._id}`,
         { status: newStatus },
         { withCredentials: true }
       );
@@ -70,7 +70,7 @@ const Project = () => {
   const updateTaskStatus = async (taskId: string, newStatus: string) => {
     try {
       await axios.patch(
-        `http://localhost:7777/api/project/updateTaskStatus/${taskId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/project/updateTaskStatus/${taskId}`,
         { status: newStatus },
         { withCredentials: true }
       );

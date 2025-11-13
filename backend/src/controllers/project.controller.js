@@ -45,7 +45,7 @@ export const createProject = async (req, res) => {
             active: true,
             events: ["push"],
             config: {
-              url: "https://mybackendurl.com/api/github/webhook",
+              url: "http://localhost:7777/api/github/webhook",
               content_type: "json",
             },
           },

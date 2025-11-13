@@ -25,7 +25,7 @@ const AllProject: React.FC<ThemeType> = ({ theme }) => {
       setLoading(true);
       try {
         const res = await axios.get(
-          "http://localhost:7777/api/project/getAllProject",
+          `${import.meta.env.VITE_BACKEND_URL}/api/project/getAllProject`,
           { withCredentials: true }
         );
         if (res.status === 200) {

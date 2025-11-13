@@ -1,11 +1,12 @@
 import axios from "axios";
-import { User } from "../models/User.js";
+import { User } from "../models/user.model.js";
 
 export const githubCallback = async (req, res) => {
   const code = req.query.code;
   const userId = req.user?._id;
 
   try {
+    console.log("github inside")
     const tokenResponse = await axios.post(
       "https://github.com/login/oauth/access_token",
       {
@@ -20,21 +21,19 @@ export const githubCallback = async (req, res) => {
 
     const accessToken = tokenResponse.data.access_token;
 
-    // 2️⃣ Fetch GitHub user profile
     const userResponse = await axios.get("https://api.github.com/user", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     const githubUsername = userResponse.data.login;
 
-    // 3️⃣ Save GitHub info into user model
-    await User.findByIdAndUpdate(userId, {
+    const user = await User.findByIdAndUpdate(userId, {
       githubUsername,
       githubAccessToken: accessToken,
-    });
+    }, {new: true});
+    
 
-    // 4️⃣ Redirect user back to frontend
-    res.redirect("http://localhost:5173/dashboard");
+    res.redirect("http://localhost:5173");
   } catch (error) {
     console.error("GitHub OAuth failed:", error);
     res.status(500).json({ message: "GitHub connection failed" });

@@ -15,7 +15,7 @@ const AiAssistance = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:7777/api/ai_assistance/intellio", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/ai_assistance/intellio`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
